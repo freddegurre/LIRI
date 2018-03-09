@@ -9,10 +9,13 @@ var client = new Twitter(keys.twitter);
 
 
 var command = process.argv[2];
-var song = process.argv[3];
+var search = process.argv[3] 
 
+for (var i = 4; i < process.argv.length; i++) {
+        search += "+" +process.argv[i]; 
+    }
 
-
+//---TWITTER
 if (command === "my-tweets") {
     var params = {screen_name: 'freddegurre'};
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
@@ -26,14 +29,27 @@ if (command === "my-tweets") {
 
 
 }
+//-----SPOTIFY
 if (command === "spotify-this-song") {
-    spotify.search ({ type: "track", query: song, limit: 1}, function(error, data){
-        if (error) {
-            console.log(error); 
+    
+    spotify.search ({ type: "track", search: song, limit: 1}, function(error, data){
+        if (error) {console.log(error);}
+
+        else if (song === "") {
+            song = "The sign"
         }
         console.log(data.tracks.items); 
         
-        
     })
    
+}
+//-----Movie
+if (command === "movie-this") {
+    var apiKey = "trilogy"
+    var movieURL = "http://www.omdbapi.com/?apikey="+ apiKey+ "&s=batman"
+    request(movieURL, function(error, response, body){
+        if(error) {console.log("you have error" + error)}
+        console.log(body); 
+        
+    })
 }
