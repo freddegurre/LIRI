@@ -3,6 +3,7 @@ var keys = require("./keys.js");
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require("request");
+var fs = require("fs"); 
 
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
@@ -55,5 +56,16 @@ if (command === "movie-this") {
         console.log("Actors:  " +  movie.Actors);
         console.log("Plot:  " +  movie.Plot);
     })
+}
+
+if (command === "do-what-it-says"){
+    fs.readFile("random.txt", "utf8", function (error, data){
+        if(error) {console.log("you have error" + error)}
+        var data = (data.split(","));
+        var textCommand = data[0]; 
+        var song = data[1];
+        console.log(textCommand, song)
+        
+    } )
 }
 
