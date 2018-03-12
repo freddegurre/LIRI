@@ -29,17 +29,19 @@ if (command === "my-tweets") {
     });
 
 }
-//-----SPOTIFY
-if (command === "spotify-this-song") {
-    spotify.search({ type: "track", query: query, limit: 1}, function(error, data){
-        if (error) {console.log(error);}
-        
-        console.log("Artist: " + data.tracks.items[0].album.artists[0].name);
-        console.log("Songs Name: " + data.tracks.items[0].name);
-        console.log("Song URL : " + data.tracks.items[0].external_urls.spotify);
-        console.log("Album : " + data.tracks.items[0].album.name);
-    }); 
-}
+function spotfunct (command, query) {
+    //-----SPOTIFY
+    if (command === "spotify-this-song") {
+        spotify.search({ type: "track", query: query, limit: 1}, function(error, data){
+            if (error) {console.log(error);}
+            
+            console.log("Artist: " + data.tracks.items[0].album.artists[0].name);
+            console.log("Songs Name: " + data.tracks.items[0].name);
+            console.log("Song URL : " + data.tracks.items[0].external_urls.spotify);
+            console.log("Album : " + data.tracks.items[0].album.name);
+        }); 
+    }
+} 
 //-----Movie
 if (command === "movie-this") {
     var apiKey = "trilogy"
@@ -61,10 +63,11 @@ if (command === "movie-this") {
 if (command === "do-what-it-says"){
     fs.readFile("random.txt", "utf8", function (error, data){
         if(error) {console.log("you have error" + error)}
+        
         var data = (data.split(","));
-        var textCommand = data[0]; 
+        command = data[0]; 
         var song = data[1];
-        console.log(textCommand, song)
+        spotfunct (command, song); 
         
     } )
 }
