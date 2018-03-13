@@ -10,7 +10,7 @@ var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
 inquirer.prompt([
-    //commant question
+    //command question
     {
         type: "list",
         message: "Choose command",
@@ -25,10 +25,9 @@ inquirer.prompt([
     }
 
 
-]).then(function (input) {
+]).then(function(input) {
 
     var command = input.command;
-
     var query = input.query;
 
     function liriApp(command, query) {
@@ -70,7 +69,7 @@ inquirer.prompt([
             });
         }
 
-        //-----Movie
+        //-----Movie--- OMDB
         if (command === "movie-this") {
             if (query === ""){
                 query = "Mr Nobody"
@@ -81,28 +80,28 @@ inquirer.prompt([
                 if (error) { console.log("you have error" + error) }
                 var movie = JSON.parse(body);
                 console.log("Title: " + movie.Title);
-                fs.appendFile("log.txt", "\n" + "Title: " + movie.Title + "\n", function() {});
+                    fs.appendFile("log.txt", "\n" + "Title: " + movie.Title + "\n", function() {});
 
                 console.log("Released: " + movie.Released);
-                fs.appendFile("log.txt", "\n" + "Released: " + movie.Released + "\n", function() {});
+                    fs.appendFile("log.txt", "\n" + "Released: " + movie.Released + "\n", function() {});
 
                 console.log("IMDB:  " + movie.imdbRating);
-                fs.appendFile("log.txt", "\n" + "IMDB:  " + movie.imdbRating + "\n", function() {});
+                    fs.appendFile("log.txt", "\n" + "IMDB:  " + movie.imdbRating + "\n", function() {});
 
                 console.log("Rotten Tomatoes: " + movie.Ratings[1].Value);
-                fs.appendFile("log.txt", "\n" + "Rotten Tomatoes: " + movie.Ratings[1].Value + "\n", function() {});
+                    fs.appendFile("log.txt", "\n" + "Rotten Tomatoes: " + movie.Ratings[1].Value + "\n", function() {});
 
                 console.log("Produced:  " + movie.Country);
-                fs.appendFile("log.txt", "\n" + "Produced:  " + movie.Country + "\n", function() {});
+                    fs.appendFile("log.txt", "\n" + "Produced:  " + movie.Country + "\n", function() {});
 
                 console.log("Language:  " + movie.Language);
-                fs.appendFile("log.txt",  + "Language:  " + movie.Language + "\n", function() {});
+                    fs.appendFile("log.txt",  + "Language:  " + movie.Language + "\n", function() {});
 
                 console.log("Actors:  " + movie.Actors);
-                fs.appendFile("log.txt", "\n" + "Actors:  " + movie.Actors + "\n", function() {});
+                    fs.appendFile("log.txt", "\n" + "Actors:  " + movie.Actors + "\n", function() {});
 
                 console.log("Plot:  " + movie.Plot);
-                fs.appendFile("log.txt", "\n" + "Plot:  " + movie.Plot + "\n", function() {});
+                    fs.appendFile("log.txt", "\n" + "Plot:  " + movie.Plot + "\n", function() {});
             })
         }
         //----Read from random.txt
